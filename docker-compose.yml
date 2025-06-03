@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  steam-price-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: steam-price-comparison
+    restart: unless-stopped
+    environment:
+      - PORT=8080
+    # Optional: mount data directory if you want persistent data
+    # volumes:
+    #   - ./src/data.sqlite:/app/build/src/data.sqlite:ro
+    
+    # Optional: resource limits
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '1.0'
+        reservations:
+          memory: 256M
+          cpus: '0.5'
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

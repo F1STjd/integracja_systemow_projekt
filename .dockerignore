@@ -1,0 +1,45 @@
+# Build directories
+build/
+.cache/
+.vs/
+.vscode/
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# IDE files
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.suo
+
+# Logs
+*.log
+
+# Node modules (if any)
+node_modules/
+
+# Docker files (don't copy itself)
+Dockerfile
+.dockerignore
+
+# Test files that aren't needed in production
+*test*
+*Test*
+*TEST*
