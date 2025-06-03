@@ -1,5 +1,5 @@
 # Use Ubuntu 24.04 as base image for better C++26 support
-FROM ubuntu:24.04
+FROM ubuntu:25.10
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     # C++ compiler with C++26 support
     gcc-14 \
     g++-14 \
+    libglaze-dev \
     # SQLite3 development libraries
     libsqlite3-dev \
     sqlite3 \
@@ -39,14 +40,6 @@ RUN git clone --depth 1 https://github.com/yhirose/cpp-httplib.git /tmp/cpp-http
     && cmake --build build \
     && cmake --install build \
     && rm -rf /tmp/cpp-httplib
-
-# Clone and install Glaze JSON library
-RUN git clone --depth 1 https://github.com/stephenberry/glaze.git /tmp/glaze \
-    && cd /tmp/glaze \
-    && cmake -B build -DCMAKE_BUILD_TYPE=Release \
-    && cmake --build build \
-    && cmake --install build \
-    && rm -rf /tmp/glaze
 
 # Create application directory
 WORKDIR /app
