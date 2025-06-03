@@ -18,8 +18,8 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     # C++ compiler with C++26 support
-    gcc-14 \
-    g++-14 \
+    gcc-15.1 \
+    g++-15.1 \
     libglaze-dev \
     # SQLite3 development libraries
     libsqlite3-dev \
@@ -30,8 +30,8 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Set GCC-14 as default
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100 \
-    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-15.1 100 \
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-15.1 100
 
 # Clone and install cpp-httplib
 RUN git clone --depth 1 https://github.com/yhirose/cpp-httplib.git /tmp/cpp-httplib \

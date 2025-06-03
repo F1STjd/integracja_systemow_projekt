@@ -1,107 +1,107 @@
-# Steam Price Comparison - Docker Setup
+# Porównanie Cen Steam - Konfiguracja Docker
 
-This application compares Steam game prices across different regions with affordability analysis.
+Ta aplikacja porównuje ceny gier Steam w różnych regionach z analizą przystępności cenowej.
 
-## Prerequisites
+## Wymagania
 
 - Docker
-- Docker Compose (optional, for easier deployment)
+- Docker Compose (opcjonalnie, dla łatwiejszego wdrożenia)
 
-## Building and Running with Docker
+## Budowanie i Uruchamianie z Docker
 
-### Option 1: Using Docker Compose (Recommended)
+### Opcja 1: Używanie Docker Compose (Zalecane)
 
 ```bash
-# Build and run
+# Buduj i uruchom
 docker-compose up --build
 
-# Run in background
+# Uruchom w tle
 docker-compose up -d --build
 
-# Stop the application
+# Zatrzymaj aplikację
 docker-compose down
 ```
 
-### Option 2: Using Docker directly
+### Opcja 2: Używanie Docker bezpośrednio
 
 ```bash
-# Build the image
+# Zbuduj obraz
 docker build -t steam-price-app .
 
-# Run the container
+# Uruchom kontener
 docker run -p 8080:8080 --name steam-price-comparison steam-price-app
 
-# Run in background
+# Uruchom w tle
 docker run -d -p 8080:8080 --name steam-price-comparison steam-price-app
 ```
 
-## Accessing the Application
+## Dostęp do Aplikacji
 
-Once running, open your browser and navigate to:
+Po uruchomieniu otwórz przeglądarkę i przejdź do:
 - http://localhost:8080
 
-## Features
+## Funkcje
 
-- Search for Steam games by name
-- Compare prices across different regions
-- View affordability analysis based on GDP per capita
-- Interactive charts showing price comparisons
-- Responsive web interface
+- Wyszukiwanie gier Steam po nazwie
+- Porównywanie cen w różnych regionach
+- Podgląd analizy przystępności opartej na PKB per capita
+- Interaktywne wykresy pokazujące porównania cen
+- Responsywny interfejs internetowy
 
-## API Endpoints
+## Punkty końcowe API
 
-- `GET /` - Main search page
-- `GET /search?query=<game_name>` - Search for games
-- `GET /prices?appid=<steam_app_id>` - Get price comparison for a specific game
-- `GET /styles.css` - Application styles
+- `GET /` - Główna strona wyszukiwania
+- `GET /search?query=<nazwa_gry>` - Wyszukiwanie gier
+- `GET /prices?appid=<steam_app_id>` - Pobierz porównanie cen dla konkretnej gry
+- `GET /styles.css` - Style aplikacji
 
-## Technical Stack
+## Stos Technologiczny
 
-- **Backend**: C++26 with httplib
-- **Database**: SQLite3
-- **JSON**: Glaze library
+- **Backend**: C++26 z httplib
+- **Baza danych**: SQLite3
+- **JSON**: Biblioteka Glaze
 - **Frontend**: HTML5, CSS3, JavaScript (Chart.js, DataTables)
-- **Build System**: CMake + Ninja
+- **System budowania**: CMake + Ninja
 
-## Container Details
+## Szczegóły Kontenera
 
-- **Base Image**: Ubuntu 24.04
-- **Compiler**: GCC-14 with C++26 support
+- **Obraz bazowy**: Ubuntu 24.04
+- **Kompilator**: GCC-14 z obsługą C++26
 - **Port**: 8080
-- **Health Check**: Included
-- **Resource Limits**: 512MB RAM, 1 CPU (configurable)
+- **Sprawdzanie zdrowia**: Włączone
+- **Limity zasobów**: 512MB RAM, 1 CPU (konfigurowalne)
 
-## Troubleshooting
+## Rozwiązywanie problemów
 
-### If the container fails to start:
+### Jeśli kontener nie może się uruchomić:
 
-1. Check if port 8080 is available:
+1. Sprawdź czy port 8080 jest dostępny:
    ```bash
    netstat -tulpn | grep 8080
    ```
 
-2. View container logs:
+2. Wyświetl logi kontenera:
    ```bash
    docker logs steam-price-comparison
    ```
 
-3. Check container status:
+3. Sprawdź status kontenera:
    ```bash
    docker ps -a
    ```
 
-### If the database is not found:
+### Jeśli baza danych nie została znaleziona:
 
-The SQLite database should be automatically copied during the container startup. If you encounter database-related errors, ensure the `src/data.sqlite` file exists in your project directory.
+Baza danych SQLite powinna być automatycznie skopiowana podczas uruchamiania kontenera. Jeśli napotkasz błędy związane z bazą danych, upewnij się, że plik `src/data.sqlite` istnieje w katalogu projektu.
 
-## Development
+## Rozwój
 
-To modify the application:
+Aby zmodyfikować aplikację:
 
-1. Make changes to the source code
-2. Rebuild the Docker image:
+1. Wprowadź zmiany w kodzie źródłowym
+2. Przebuduj obraz Docker:
    ```bash
    docker-compose up --build
    ```
 
-The Dockerfile uses layer caching to speed up rebuilds when only source code changes.
+Dockerfile używa buforowania warstw, aby przyspieszyć ponowne budowanie gdy zmieniają się tylko pliki źródłowe.
